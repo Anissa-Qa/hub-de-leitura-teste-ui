@@ -1,0 +1,40 @@
+describe('Funcionalidade; Contato', () => {
+
+  it('Deve preencher formulário de contato com sucesso', () => {
+    cy.visit('http://localhost:3000/index.html')
+    cy.get('[name="name"]').type('Anissa Ahmed')
+    cy.get('[name="email"]').type('anissa@teste.com')
+    cy.get('[name="subject"]').select('Parcerias')
+    cy.get('[name="message"]').type('mesagem de teste')
+    cy.get('#btn-submit').click()
+    //Deve aparecer resultado esperado pois todos os testes precisam disso ao fim
+    cy.contains('Contato enviado com sucesso!').should('exist')
+
+  });
+
+  it('Deve validar mensagem de erro ao enviar sem preencher nome', () => {
+    cy.visit('http://localhost:3000/index.html')
+    cy.get('[name="name"]').clear
+    cy.get('[name="email"]').type('anissa@teste.com')
+    cy.get('[name="subject"]').select('Parcerias')
+    cy.get('[name="message"]').type('mesagem de teste')
+    cy.get('#btn-submit').click()
+    cy.get('#alert-container').should('exist')
+
+});
+
+  it('Deve validar mensagem de erro ao enviar sem preencher email', () => {
+    it.only('Deve validar mensagem de erro ao enviar sem preencher email', () => {
+    cy.visit('http://localhost:3000/index.html')
+    cy.get('[name="name"]').type('Anissa')
+    cy.get('[name="email"]').clear
+    cy.get('[name="subject"]').select('Parcerias')
+    cy.get('[name="message"]').type('mesagem de teste')
+    cy.get('#btn-submit').click()
+    cy.get('#alert-container').should('exist')
+
+  });
+  it('Deve validar mensagem de erro ao enviar sem selecionar o assunto', () => {
+
+  });
+  it('Deve validar 
